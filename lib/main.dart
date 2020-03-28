@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Color(0xff3d155f),
         accentColor: Color(0xffdf678c),
+        cursorColor: Colors.black,
         textTheme: TextTheme(
           headline: TextStyle( fontSize: 72.0, fontWeight: FontWeight.bold),
           title: TextStyle( fontSize: 36.0, fontStyle: FontStyle.normal),
