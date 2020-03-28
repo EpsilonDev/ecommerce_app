@@ -8,6 +8,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   final _formKey = GlobalKey<FormState>();
+  bool _obscureText = true;
   String _username, _email, _pwd;
 
   void _onSubmit() {
@@ -66,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    obscureText: _obscureText,
                     onSaved: (val) => _pwd = val,
                     validator: (val) => val.length < 6 ? ('Password too short') : null,
                     decoration: InputDecoration(
@@ -74,6 +75,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       border: OutlineInputBorder(),
                       labelText: 'Password',
                       icon: Icon(Icons.lock),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                        child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                      )
                     ),
                   ),
                 ),
@@ -86,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     borderRadius: BorderRadius.all(Radius.circular(8.0)))     
                 ),
                 FlatButton(
-                  onPressed: () => print('Login'),
+                  onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
                   child: Text('Existing user ? Login')
                 )    
               ],
