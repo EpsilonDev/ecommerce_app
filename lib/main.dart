@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/ui/login_page.dart';
 import 'package:ecommerce_app/ui/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           body1: TextStyle( fontSize: 18.0)
         )
       ),
-      home: RegisterPage(),
+      home: LoginPage(),
     );
   }
 }
