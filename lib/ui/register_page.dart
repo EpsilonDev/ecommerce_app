@@ -10,6 +10,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   bool _obscureText = true;
   String _username, _email, _pwd;
 
@@ -27,7 +29,27 @@ class _RegisterPageState extends State<RegisterPage> {
 
     var responseData = json.decode(response.body);
     print(responseData);
+
+    if(response.statusCode == 200) {
+      _showSnackBar();
+      _formKey.currentState.reset();
+    } else {
+        final errorMessage = responseData['message'];
+        _showErrorSnackBar(errorMessage);
+        _formKey.currentState.reset();
+    }
   }
+
+   void _showErrorSnackBar(message) {
+    final _snackBar = SnackBar(content: Text('$message', style: TextStyle(color: Colors.white),), backgroundColor: Theme.of(context).primaryColor,);
+    _scaffoldKey.currentState.showSnackBar(_snackBar);
+  } 
+
+  void _showSnackBar() {
+    final _snackBar = SnackBar(content: Text('User: $_username successfully created !', style: TextStyle(color: Colors.white),), backgroundColor: Theme.of(context).primaryColor,);
+    _scaffoldKey.currentState.showSnackBar(_snackBar);
+  }
+
 
   void _onSubmit() {
     if( _formKey.currentState.validate() ) {
@@ -42,6 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(title: Center(child: Text('Register')),),
       body: Center(
         child: Container(
