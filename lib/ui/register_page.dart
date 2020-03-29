@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -11,10 +13,26 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _obscureText = true;
   String _username, _email, _pwd;
 
+
+  void _registerUser() async {
+
+    http.Response response = await http.post(
+      'http://10.0.3.2:1337/auth/local/register',
+      body: {
+        "username": _username,
+        "email": _email,
+        "password": _pwd
+      }
+    );
+
+    var responseData = json.decode(response.body);
+    print(responseData);
+  }
+
   void _onSubmit() {
     if( _formKey.currentState.validate() ) {
       _formKey.currentState.save();
-      print('$_username, $_email, $_pwd');
+      _registerUser();
     } else {
       print('Invalid');
     }
