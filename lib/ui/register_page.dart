@@ -37,6 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
         final errorMessage = responseData['message'];
         _showErrorSnackBar(errorMessage);
         _formKey.currentState.reset();
+        throw Exception('Error registering: $errorMessage');
     }
   }
 
