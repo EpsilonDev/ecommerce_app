@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/ui/login_page.dart';
+import 'package:ecommerce_app/ui/products_page.dart';
 import 'package:ecommerce_app/ui/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/login' : (BuildContext context) => LoginPage(),
         '/register' : (BuildContext context) => RegisterPage()
       },
-      home: LoginPage(),
+      home: ProductsPage()
     );
   }
 }

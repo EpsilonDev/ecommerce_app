@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   LoginPageState createState() => LoginPageState();
@@ -34,9 +36,10 @@ class LoginPageState extends State<LoginPage> {
     print(responseData);
 
     if(response.statusCode == 200) {
-        setState(() {
-          _isSubmitting = false;
-        });
+      setState(() {
+        _isSubmitting = false;
+      });
+      _storeUserData(responseData);
       _showSnackBar();
       _formKey.currentState.reset();
     } else {
@@ -61,6 +64,12 @@ class LoginPageState extends State<LoginPage> {
   }
 
 
+  void _storeUserData(responseData) async {
+    final prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> user = responseData['user'];
+    user.putIfAbsent('jwt', () => responseData['jwt']);
+    prefs.setString('user', json.encode('user'));
+  }
 
   void _onSubmit() {
     if( _formKey.currentState.validate() ) {
