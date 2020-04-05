@@ -42,6 +42,7 @@ class LoginPageState extends State<LoginPage> {
       _storeUserData(responseData);
       _showSnackBar();
       _formKey.currentState.reset();
+      _redirectUser();
     } else {
         setState(() {
           _isSubmitting = false;
@@ -56,7 +57,11 @@ class LoginPageState extends State<LoginPage> {
    void _showErrorSnackBar(message) {
     final _snackBar = SnackBar(content: Text('$message', style: TextStyle(color: Colors.white),), backgroundColor: Theme.of(context).primaryColor,);
     _scaffoldKey.currentState.showSnackBar(_snackBar);
-  } 
+  }
+
+  void _redirectUser() {
+    Navigator.of(context).pushReplacementNamed('/products');
+  }
 
   void _showSnackBar() {
     final _snackBar = SnackBar(content: Text('User: successfully logged in !', style: TextStyle(color: Colors.white),), backgroundColor: Theme.of(context).primaryColor,);
@@ -68,7 +73,7 @@ class LoginPageState extends State<LoginPage> {
     final prefs = await SharedPreferences.getInstance();
     Map<String, dynamic> user = responseData['user'];
     user.putIfAbsent('jwt', () => responseData['jwt']);
-    prefs.setString('user', json.encode('user'));
+    prefs.setString('user', json.encode(user));
   }
 
   void _onSubmit() {

@@ -1,14 +1,15 @@
+import 'package:ecommerce_app/ui/models/user.dart';
 import 'package:meta/meta.dart';
 
 @immutable
 class AppState {
-  final dynamic user;
+  final User user;
 
   AppState({@required this.user});
 
   factory AppState.initial() {
     return AppState(
-      user: null
+      user: null,
     );
   }
 }
