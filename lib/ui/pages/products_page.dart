@@ -40,6 +40,9 @@ class ProductsPageState extends State<ProductsPage> {
               backgroundColor: Theme.of(context).primaryColor,
               centerTitle: true,
               title: SizedBox(child: state.user != null ? Text(state.user.username, style: TextStyle(color: Colors.white),) : Text(''),),
+              actions: <Widget>[
+                state.user != null ? IconButton(icon: Icon(Icons.exit_to_app), color: Colors.white, onPressed: () => print('pressed')) : Text('')
+              ],
             );
         },
     ),
