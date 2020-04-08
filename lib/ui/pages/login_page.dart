@@ -41,7 +41,6 @@ class LoginPageState extends State<LoginPage> {
       });
       _storeUserData(responseData);
       _showSnackBar();
-      _formKey.currentState.reset();
       _redirectUser();
     } else {
         setState(() {
@@ -60,7 +59,8 @@ class LoginPageState extends State<LoginPage> {
   }
 
   void _redirectUser() {
-    Navigator.of(context).pushReplacementNamed('/products');
+    Future.delayed(Duration(seconds: 2), () => Navigator.of(context).pushReplacementNamed('/products'));
+    
   }
 
   void _showSnackBar() {

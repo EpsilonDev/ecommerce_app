@@ -4,12 +4,14 @@ import 'package:meta/meta.dart';
 @immutable
 class AppState {
   final User user;
+  final List<dynamic> categories;
 
-  AppState({@required this.user});
+  AppState({@required this.user, @required this.categories});
 
   factory AppState.initial() {
     return AppState(
       user: null,
+      categories: []
     );
   }
 }

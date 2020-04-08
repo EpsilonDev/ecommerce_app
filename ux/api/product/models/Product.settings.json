@@ -1,6 +1,6 @@
 {
   "connection": "default",
-  "collectionName": "",
+  "collectionName": "product",
   "info": {
     "name": "product",
     "description": ""
@@ -27,6 +27,10 @@
       "model": "user",
       "via": "products",
       "plugin": "users-permissions"
+    },
+    "category": {
+      "model": "categorie",
+      "via": "products"
     }
   }
 }

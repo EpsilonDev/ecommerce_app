@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
           '/products' : (BuildContext context) => ProductsPage(
             onInit: () {
               StoreProvider.of<AppState>(context).dispatch(getUserAction);
+              StoreProvider.of<AppState>(context).dispatch(getCategoriesAction);
             },
           )
         },

@@ -4,7 +4,8 @@ import 'package:ecommerce_app/ui/redux/actions.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   return AppState(
-    user: userReducer(state.user, action)
+    user: userReducer(state.user, action),
+    categories: categoriesReducer(state.categories ,action)
       );
     }
     
@@ -13,4 +14,11 @@ User userReducer(User user, dynamic action) {
     return action.user;
   } 
   return user;
+}
+
+categoriesReducer(categories, action) {
+  if (action is GetCategoriesAction) {
+    return action.categories;
+  }
+  return categories;
 }
